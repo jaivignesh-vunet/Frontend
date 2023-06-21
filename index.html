@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Water Purity Indicator</title>
+    <style>
+        /* Styles for the indicator */
+        .container {
+            width: 200px;
+            height: 300px;
+            position: relative;
+            background-color: #f2f2f2;
+            border: 2px solid #ccc;
+        }
+        
+        .water-level {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #3498db;
+            transition: height 0.5s ease-in-out;
+        }
+        
+        .label {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .btn-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Water Purity Indicator</h1>
+    <div class="container">
+        <div id="water-level" class="water-level"></div>
+    </div>
+    <div class="label">Water Purity: <span id="purity-value">-</span></div>
+    <div class="btn-container">
+        <button id="update-btn" class="btn">Update Purity</button>
+    </div>
+
+    <script src="frontend.js"></script>
+</body>
+</html>
