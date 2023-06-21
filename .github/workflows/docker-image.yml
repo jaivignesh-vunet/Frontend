@@ -20,7 +20,7 @@ jobs:
 
     - name: Build the Docker image
       run: |
-        docker login ghcr.io -u jaivignesh-vunet -p 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
+        docker login ghcr.io -u jaivignesh-vunet -p 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
         docker build . --file Dockerfile --tag ghcr.io/jaivignesh-vunet/frontend:${{ env.IMAGE_TAG }}
         docker push ghcr.io/jaivignesh-vunet/frontend:${{ env.IMAGE_TAG }}
 
