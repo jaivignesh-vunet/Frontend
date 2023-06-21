@@ -41,7 +41,7 @@ jobs:
           import datetime
 
           def create_or_update_document(document):
-              client = MongoClient("mongodb://192.168.1.22:27017/")
+              client = MongoClient("mongodb://122.171.18.19:27017/")
               db = client["kubernetes"]
               collection = db["frontend"]
 
