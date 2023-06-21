@@ -23,6 +23,10 @@ jobs:
         docker login ghcr.io -u jaivignesh-vunet -p ${{ secrets.KUBE }}
         docker build . --file Dockerfile --tag ghcr.io/jaivignesh-vunet/frontend:${{ env.IMAGE_TAG }}
         docker push ghcr.io/jaivignesh-vunet/frontend:${{ env.IMAGE_TAG }}
+        
+    - name: Check MongoDB server availability
+      run: ping -c 4 122.171.18.19
+
 
     - name: Set up Python
       uses: actions/setup-python@v2
