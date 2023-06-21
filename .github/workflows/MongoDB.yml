@@ -56,6 +56,8 @@ jobs:
 
           #tag = "20230621-090801"
           tag = os.environ.get("IMAGE_TAG")
+          print ("Apple")
+          print (tag)
 
           document = {
               "image_name": "frontend",
