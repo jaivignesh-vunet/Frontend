@@ -1,0 +1,68 @@
+name: Update mongoDB
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  my-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.12
+          
+      - name: Install dependencies
+        run: |
+          pip install pymongo
+
+      - name: Run Python script
+        run: |
+          python -c '
+          from pymongo import MongoClient
+          import os
+          import datetime
+
+          def create_or_update_document(document):
+              client = MongoClient()
+              db = client["kubernetes"]
+              collection = db["frontend"]
+
+              # Insert or update the document in the collection
+              collection.update_one({}, {"$set": document}, upsert=True)
+
+              client.close()
+
+          def date(tag):
+              date_string = tag
+              formatted_date = datetime.datetime.strptime(date_string, "%Y%m%d-%H%M%S")
+              formatted_date_only = formatted_date.strftime("%Y-%m-%d")
+              return formatted_date_only
+
+
+          def time2(tag):
+              date_string = tag
+              formatted_date = datetime.datetime.strptime(date_string, "%Y%m%d-%H%M%S")
+              formatted_time_only = formatted_date.strftime("%H:%M:%S")
+              return formatted_time_only
+
+
+          #tag = "20230621-090801"
+          tag = os.environ.get("IMAGE_TAG")
+
+          document = {
+              "image_name": "frontend",
+              "tag": tag,
+              "date created": date(tag),
+              "time created": time2(tag),
+              "pull command": "docker pull ghcr.io/jaivignesh-vunet/frontend:"+tag
+          }
+
+          create_or_update_document(document) '
+
